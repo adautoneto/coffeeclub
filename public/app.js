@@ -8,14 +8,5 @@
 		storageBucket: "coffeeclub-33a84.appspot.com",
 		messagingSenderId: "204712776659"
 	};
-	firebase.initializeApp(config);
-
-	var logout = document.getElementById("logout");
-	logout.addEventListener("click", () => {
-		firebase.auth().signOut().then(function() {
-		  console.log('User logged out');
-		}, function(error) {
-		  // An error happened.
-		});
-	});
+	firebase.initializeApp(config);	
 }());
