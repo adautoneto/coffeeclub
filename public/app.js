@@ -10,4 +10,12 @@
 	};
 	firebase.initializeApp(config);
 
+	var logout = document.getElementById("logout");
+	logout.addEventListener("click", () => {
+		firebase.auth().signOut().then(function() {
+		  console.log('User logged out');
+		}, function(error) {
+		  // An error happened.
+		});
+	});
 }());
