@@ -3,12 +3,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Welcome to the Coffee Club - My Balance</title>
+	<style>
+		body { font: 14px Helvetica, Arial; }
+		#user { margin: 20px auto; text-align: center; }
+		#photo { width: 100px; -webkit-clip-path: circle(50px); }
+		#container { margin: 0 auto; text-align: center; }
+		#statement { list-style: none; margin: 0; padding: 0; }
+	</style>
 </head>
 <body>
-	<img id="photo" width=50 height=50></img> <span id="displayName"></span><a id="logout" href="#">Sair</a>
+	<section id="user">
+		<img id="photo"></img>
+		<div><a id="logout" href="#">Sair</a></div>
+	</section>
 
 	<div id="container">
-		<h2 id="balance">Saldo: R$ </h2>
+		<h2>Saldo: <span id="balance"></span></h2>
 		Extrato: <ol id="statement"></ol>
 	</div>
 
@@ -31,6 +41,8 @@
 
 			  var displayName = document.getElementById("displayName");
 			  displayName.innerText = name;
+
+			  loadBalance(displayName);
 		  } else {
 		    location.href = "index.html"
 		  }
@@ -45,8 +57,9 @@
 		});
 	});
 
+	function loadBalance(displayName) {
 	  let balance = 0;
-	  var dbRef = firebase.database().ref().child('statement/Adauto');	  
+	  var dbRef = firebase.database().ref().child('statement/' + displayName);	  
 	  let statement = document.getElementById('statement');
 	  dbRef.on('value', snap => {
 	  	snap.forEach(_ => {	  	
@@ -56,8 +69,9 @@
 		  	balance += _.val().value;	  
 	    });
 	    let balanceElement = document.getElementById('balance');
-	    balanceElement.innerText += balance;
+	    balanceElement.innerText = "R$ " + balance;
 	  });
+	}
 	</script>
 </body>
 </html>
