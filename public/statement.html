@@ -20,9 +20,11 @@
 		</section>
 		<div id="container">
 			<section id="whats-next">
-				<h3>Próximo café: <span id="next-coffee-name">Café Fazenda São João 1KG (Previsão de entrega: 14/10)</span></h3>
+				<h3>Próximo café: <span id="next-coffee-name">Wolf Café 250g</span></h3>
+				<!--<h3>Próximo café: <span id="next-coffee-name">Café Fazenda São João 1KG (Previsão de entrega: 14/10)</span></h3>-->
 				<p><strong><a id="participate" href="#">Quero participar!</a></strong></p>
-				<img src="https://cdn.awsli.com.br/400x400/100/100625/produto/3491247/4e8aedd215.jpg" alt="Café da Fazenda São João">				
+				<img src="wolf_cafe.png" alt="Wolf Café">
+				<!--<img src="https://cdn.awsli.com.br/400x400/100/100625/produto/3491247/4e8aedd215.jpg" alt="Café da Fazenda São João">-->
 			</section>
 
 			<h2>Seu saldo é: <span id="balance"></span></h2>
@@ -111,11 +113,11 @@
 				clearTable(statement);
 				snap.forEach(_ => {
 					var val = _.val();
-					createRowOnTable(statement, val.date.replace('-', '/'), val.value, val.description);					
+					createRowOnTable(statement, val.date.replace('-', '/'), val.value.toFixed(2), val.description);					
 					balance += _.val().value;
 				});
 				let balanceElement = document.getElementById('balance');
-				balanceElement.innerText = "R$ " + balance;
+				balanceElement.innerText = "R$ " + balance.toFixed(2);
 			});
 		}
 	</script>
