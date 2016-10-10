@@ -76,11 +76,25 @@
 			alert('Obrigado! Você está participando do próximo café!');
 		});
 
+		function isParticipating(){
+			const dbRef = firebase.database().ref().child('next-coffee/participants');
+			const name = firebase.auth().currentUser.displayName;			
+			dbRef.once('value', _ => {
+				const values = _.val();
+				const participants = Object.keys(values).map(k => values[k]);
+				if (participants.indexOf(name) > -1) {
+					var participate = document.getElementById("participate");
+					participate.innerText = "Você está participando!";
+				}
+			});
+		}
+
 		function showNextCoffee() {
 			const dbRef = firebase.database().ref().child('next-coffee');			
 			dbRef.on('value', snap => {
 				let cost = document.getElementById('cost');
 				let expectedPrice = document.getElementById('cost');
+				isParticipating();
 			});
 		}
 
