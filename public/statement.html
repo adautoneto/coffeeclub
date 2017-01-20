@@ -14,10 +14,7 @@
 		</style>
 	</head>
 	<body>
-		<section id="user">
-			<img id="photo" />
-			<div><a id="logout" href="#">Sair</a></div>
-		</section>
+		<user-photo signout-url="/index.html"></user-photo>
 		<div id="container">
 			<section id="whats-next">				
 				<h3>Café dessa semana: <span id="next-coffee-name">Wolf (Alho poró) 250 KG</span></h3>
@@ -38,34 +35,6 @@
 	<script src="https://www.gstatic.com/firebasejs/3.4.1/firebase.js"></script>
 	<script src="app.js"></script>
 	<script>
-		firebase.auth().onAuthStateChanged(function(user) {
-			if (user) {
-				var name, email, photoUrl, uid;
-					name = user.displayName;
-					email = user.email;
-					photoUrl = user.photoURL;
-					uid = user.uid;  // The user's ID, unique to the Firebase project. Do NOT use
-					// this value to authenticate with your backend server, if
-					// you have one. Use User.getToken() instead.
-					var photo = document.getElementById("photo");
-					photo.src = photoUrl;
-
-					showNextCoffee();
-					loadBalance(name);					
-			} else {
-				location.href = "index.html"
-			}
-		});
-		
-		var logout = document.getElementById("logout");
-		logout.addEventListener("click", () => {
-			firebase.auth().signOut().then(function() {
-				console.log('User logged out');
-			}, function(error) {
-			// An error happened.
-			});
-		});
-
 		var participate = document.getElementById("participate");
 		participate.addEventListener("click", (e) => {
 			e.preventDefault();
